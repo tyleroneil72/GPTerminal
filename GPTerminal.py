@@ -7,7 +7,11 @@ API_KEY = "your_api_key_here"
 MODEL = "your_model_here"
 
 # Setup argument parser
-parser = argparse.ArgumentParser(description="GPTerminal - A CLI tool for interacting with OpenAI's GPT models.")
+description = """
+GPTerminal - A CLI tool for interacting with OpenAI's GPT models.
+Created by Tyler O'Neil. For more information, visit: https://tyleroneil.dev
+"""
+parser = argparse.ArgumentParser(description=description)
 parser.add_argument('-setup', action='store_true', help='Setup API_KEY and MODEL for GPTerminal.')
 parser.add_argument('-help', action='store_true', help='Show available commands.')
 parser.add_argument('query', nargs='?', default=None, help='Query to be processed by the GPT model.')
