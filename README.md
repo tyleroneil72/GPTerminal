@@ -1,5 +1,7 @@
 # GPTerminal
 
+## Description
+
 Terminal Copilot
 
 ## Installation
@@ -34,3 +36,8 @@ sudo ln -s $(pwd)/GPTerminal.py /usr/local/bin/GPTerminal
 ```Bash
 sudo rm /usr/local/bin/GPTerminal
 ```
+
+## Contact
+
+For any inquiries or questions, you can reach me at tyleroneildev@gmail.com
+or on my linkedin at https://ca.linkedin.com/in/tyler-oneil-dev
