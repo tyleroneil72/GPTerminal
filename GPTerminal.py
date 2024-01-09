@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 import sys
+from openai import OpenAI
+client = OpenAI()
 
 def main():
     if len(sys.argv) > 1:
