@@ -1,2 +1,2 @@
-# terminal-copilot
+# GPTerminal
 Terminal Copilot
