@@ -7,6 +7,7 @@ Terminal Copilot
 ```Bash
 git clone https://github.com/tyleroneil72/GPTerminal.git
 cd GPTerminal
+pip install -r requirements.txt
 ```
 
 ### Linux/Mac
