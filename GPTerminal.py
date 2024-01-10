@@ -4,10 +4,11 @@ import argparse
 import sys
 import os
 import subprocess
+from typing import Optional
 
 # Global default values
-API_KEY = None
-MODEL = "gpt-3.5-turbo"
+API_KEY: Optional[str] = "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"
+MODEL: str = "gpt-3.5-turbo"
 
 # ANSI escape sequences for terminal colours
 class Colours:
@@ -31,7 +32,7 @@ parser.add_argument('-uninstall', action='store_true', help='Uninstall GPTermina
 parser.add_argument('query', nargs='?', default=None, help='Query to be processed by the GPT model.')
 args = parser.parse_args()
 
-def update_script(api_key, model):
+def update_script(api_key: str, model: str) -> None:
     """ Update the script with the new API_KEY and MODEL."""
     try:
         with open(__file__, 'r') as file:
@@ -39,36 +40,36 @@ def update_script(api_key, model):
 
         with open(__file__, 'w') as file:
             for line in lines:
-                if line.startswith('API_KEY = None') and api_key is None:
+                if line.startswith('API_KEY: Optional[str] = None') and api_key is None:
                     file.write(line)
-                elif line.startswith('API_KEY ='):
-                    file.write(f'API_KEY = "{api_key}"\n')
-                elif line.startswith('MODEL ='):
-                    file.write(f'MODEL = "{model}"\n')
+                elif line.startswith('API_KEY: Optional[str] ='):
+                    file.write(f'API_KEY: Optional[str] = "{api_key}"\n')
+                elif line.startswith('MODEL: str ='):
+                    file.write(f'MODEL: str = "{model}"\n')
                 else:
                     file.write(line)
     except IOError as e:
         print_coloured(f"Error updating script: {e}", Colours.FAIL)
         sys.exit(1)
 
-def setup_api_key():
+def setup_api_key() -> None:
     """Prompt user to enter a new API key and update the script."""
     global API_KEY
     api_key = input("Enter your new API_KEY: ").strip()
     update_script(api_key, MODEL)
     API_KEY = api_key
 
-def change_model():
+def change_model() -> None:
     """Change the GPT model being used."""
     global MODEL
     MODEL = choose_model()
     update_script(API_KEY, MODEL)
 
-def print_coloured(message, colour):
+def print_coloured(message: str, colour: str) -> None:
     """Print a message in the terminal with the specified colour."""
     print(colour + message + Colours.ENDC)
 
-def choose_model():
+def choose_model() -> str:
     """Allow the user to choose a GPT model."""
     print_coloured("Available models:", Colours.OKBLUE)
     print_coloured("1: gpt-4", Colours.OKGREEN)
@@ -83,7 +84,7 @@ def choose_model():
         print_coloured("Invalid choice. Defaulting to gpt-3.5-turbo.", Colours.WARNING)
         return "gpt-3.5-turbo"
 
-def uninstall_script():
+def uninstall_script() -> None:
     """Uninstall the script by removing it from /usr/local/bin."""
     confirmation = input("Are you sure you want to uninstall GPTerminal? (yes/no): ").strip().lower()
     if confirmation in ["yes", "y"]:
@@ -95,7 +96,7 @@ def uninstall_script():
     else:
         print_coloured("Uninstallation cancelled.", Colours.WARNING)
 
-def update_program():
+def update_program() -> None:
     """Update the script if new code has been pushed to the repository."""
     confirmation = input("Are you sure you want to update the script and overwrite all local changes? (yes/no): ").strip().lower()
 
@@ -115,7 +116,7 @@ def update_program():
         print_coloured("Update cancelled.", Colours.WARNING)
 
 
-def main():
+def main() -> None:
     """Main function to handle command line arguments and execute corresponding actions."""
     try:
         if args.uninstall:
