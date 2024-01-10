@@ -105,11 +105,11 @@ def update_script():
             # Pull the latest changes from the repository
             os.system("git pull")
         
-            print("Script updated successfully.")
+            print_coloured("Script updated successfully.", Colours.OKGREEN)
         except Exception as e:
-            print(f"An error occurred while updating the script: {e}")
+            print_coloured(f"An error occurred while updating the script: {e}", Colours.FAIL)
     else:
-        print("Update cancelled.")
+        print_coloured("Update cancelled.", Colours.WARNING)
 
 
 def main():
