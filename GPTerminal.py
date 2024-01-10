@@ -94,7 +94,7 @@ def uninstall_script():
     else:
         print_coloured("Uninstallation cancelled.", Colours.WARNING)
 
-def update_script():
+def update_program():
     """Update the script if new code has been pushed to the repository."""
     confirmation = input("Are you sure you want to update the script and overwrite all local changes? (yes/no): ").strip().lower()
 
@@ -118,7 +118,7 @@ def main():
         if args.uninstall:
             uninstall_script()
         elif args.update:
-            update_script()
+            update_program()
         elif args.setup:
             setup_api_key()
         elif args.change_model:
