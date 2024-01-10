@@ -42,6 +42,8 @@ GPTerminal -h
 GPTerminal -setup
 # To change models
 GPTerminal -change-model
+# To Update Program
+GPTerminal -update
 # To Prompt GPT
 GPTerminal "Prompt here"
 ```
