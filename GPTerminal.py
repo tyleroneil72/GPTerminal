@@ -94,12 +94,31 @@ def uninstall_script():
     else:
         print_coloured("Uninstallation cancelled.", Colours.WARNING)
 
+def update_script():
+    """Update the script if new code has been pushed to the repository."""
+    confirmation = input("Are you sure you want to update the script and overwrite all local changes? (yes/no): ").strip().lower()
+
+    if confirmation == "yes" or confirmation == "y":
+        try:
+            # Reset any local changes
+            os.system("git reset --hard")
+            # Pull the latest changes from the repository
+            os.system("git pull")
+        
+            print("Script updated successfully.")
+        except Exception as e:
+            print(f"An error occurred while updating the script: {e}")
+    else:
+        print("Update cancelled.")
+
 
 def main():
     """Main function to handle command line arguments and execute corresponding actions."""
     try:
         if args.uninstall:
             uninstall_script()
+        elif args.update:
+            update_script(API_KEY, MODEL)
         elif args.setup:
             setup_api_key()
         elif args.change_model:
