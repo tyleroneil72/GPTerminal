@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 import openai
 import argparse
+import sys
 
 # Global default values
 API_KEY = None
-MODEL = "gpt-4"
+MODEL = "gpt-3.5-turbo"
 
 # ANSI escape sequences for terminal colours
 class Colours:
@@ -30,18 +31,21 @@ parser.add_argument('query', nargs='?', default=None, help='Query to be processe
 args = parser.parse_args()
 
 def update_script(api_key, model):
-    """Update the script file with new API key or model."""
-    with open(__file__, 'r') as file:
-        lines = file.readlines()
+    try:
+        with open(__file__, 'r') as file:
+            lines = file.readlines()
 
-    with open(__file__, 'w') as file:
-        for line in lines:
-            if line.startswith('API_KEY ='):
-                file.write(f'API_KEY = "{api_key}"\n')
-            elif line.startswith('MODEL ='):
-                file.write(f'MODEL = "{model}"\n')
-            else:
-                file.write(line)
+        with open(__file__, 'w') as file:
+            for line in lines:
+                if line.startswith('API_KEY ='):
+                    file.write(f'API_KEY = "{api_key}"\n')
+                elif line.startswith('MODEL ='):
+                    file.write(f'MODEL = "{model}"\n')
+                else:
+                    file.write(line)
+    except IOError as e:
+        print_coloured(f"Error updating script: {e}", Colours.FAIL)
+        sys.exit(1)
 
 def setup_api_key():
     """Prompt user to enter a new API key and update the script."""
@@ -77,22 +81,25 @@ def choose_model():
 
 def main():
     """Main function to handle command line arguments and execute corresponding actions."""
-    if args.setup:
-        setup_api_key()
-    elif args.change_model:
-        change_model()
-    elif args.query:
-        if not API_KEY:
-            print_coloured("API_KEY not set. Please run 'GPTerminal -setup' first.", Colours.FAIL)
-            return
-        client = openai.OpenAI(api_key=API_KEY)
-        response = client.chat.completions.create(
-            model=MODEL,
-            messages=[{"role": "user", "content": args.query}],
-        )
-        print_coloured(response.choices[0].message.content, Colours.OKBLUE)
-    else:
-        print_coloured("No input provided or invalid command. Use '-h' or '--help' for available commands.", Colours.FAIL)
+    try:
+        if args.setup:
+            setup_api_key()
+        elif args.change_model:
+            change_model()
+        elif args.query:
+            if not API_KEY:
+                print_coloured("API_KEY not set. Please run 'GPTerminal -setup' first.", Colours.FAIL)
+                return
+            client = openai.OpenAI(api_key=API_KEY)
+            response = client.chat.completions.create(
+                model=MODEL,
+                messages=[{"role": "user", "content": args.query}],
+            )
+            print_coloured(response.choices[0].message.content, Colours.OKBLUE)
+        else:
+            print_coloured("No input provided or invalid command. Use '-h' or '--help' for available commands.", Colours.FAIL)
+    except Exception as e:
+        print_coloured(f"An error occurred: {e}", Colours.FAIL)
 
 if __name__ == "__main__":
     main()
