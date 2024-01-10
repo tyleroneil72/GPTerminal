@@ -9,4 +9,4 @@ chmod +x uninstallation.sh
 # Create a symbolic link to move the script to a directory in your PATH
 sudo ln -s $(pwd)/GPTerminal.py /usr/local/bin/GPTerminal
 
-echo "GPTerminal has been installed."
+echo -e "\033[32mGPTerminal has been installed.\033[0m"

@@ -2,6 +2,7 @@
 import openai
 import argparse
 import sys
+import os
 
 # Global default values
 API_KEY = None
@@ -27,6 +28,7 @@ epilog = "For more detailed instructions, visit https://github.com/tyleroneil72/
 parser = argparse.ArgumentParser(description=description, epilog=epilog)
 parser.add_argument('-setup', action='store_true', help='Setup or change the API_KEY for GPTerminal.')
 parser.add_argument('-change-model', action='store_true', help='Change the GPT model.')
+parser.add_argument('-uninstall', action='store_true', help='Uninstall GPTerminal from the system.')
 parser.add_argument('query', nargs='?', default=None, help='Query to be processed by the GPT model.')
 args = parser.parse_args()
 
@@ -79,10 +81,25 @@ def choose_model():
         print_coloured("Invalid choice. Defaulting to gpt-3.5-turbo.", Colours.WARNING)
         return "gpt-3.5-turbo"
 
+def uninstall_script():
+    """Uninstall the script by removing it from /usr/local/bin."""
+    confirmation = input("Are you sure you want to uninstall GPTerminal? (yes/no): ").strip().lower()
+    if confirmation == "yes":
+        try:
+            os.system("sudo rm /usr/local/bin/GPTerminal")
+            print_coloured("GPTerminal has been uninstalled.", Colours.OKGREEN)
+        except Exception as e:
+            print_coloured(f"Error during uninstallation: {e}", Colours.FAIL)
+    else:
+        print_coloured("Uninstallation cancelled.", Colours.WARNING)
+
+
 def main():
     """Main function to handle command line arguments and execute corresponding actions."""
     try:
-        if args.setup:
+        if args.uninstall:
+            uninstall_script()
+        elif args.setup:
             setup_api_key()
         elif args.change_model:
             change_model()

@@ -38,9 +38,7 @@ chmod +x installation.sh
 ### Linux/Mac
 
 ```Bash
-chmod +x uninstallation.sh
-# Must be in root directory
-./uninstallation.sh
+GPTerminal -uninstall
 ```
 
 ## License
