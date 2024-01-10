@@ -5,3 +5,4 @@
 - Create an Arrow Key on GPTerminal to go through options
 - Add System Prompt Ability
 - Create a src folder
+- Create Detailed Documentation
