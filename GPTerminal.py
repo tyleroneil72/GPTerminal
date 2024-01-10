@@ -137,7 +137,7 @@ def main():
             )
             print_coloured(response.choices[0].message.content, Colours.OKBLUE)
         else:
-            print_coloured("No input provided or invalid command. Use '-h' or '--help' for available commands.", Colours.FAIL)
+            print_coloured("No input provided or invalid command. Use 'GPTerminal -h' or 'GPTerminal --help' for available commands.", Colours.FAIL)
     except Exception as e:
         print_coloured(f"An error occurred: {e}", Colours.FAIL)
 
