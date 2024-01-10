@@ -7,7 +7,7 @@ import subprocess
 from typing import Optional
 
 # Global default values
-API_KEY: Optional[str] = "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"
+API_KEY: Optional[str] = None
 MODEL: str = "gpt-3.5-turbo"
 
 # ANSI escape sequences for terminal colours
