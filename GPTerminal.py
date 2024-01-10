@@ -84,7 +84,7 @@ def choose_model():
 def uninstall_script():
     """Uninstall the script by removing it from /usr/local/bin."""
     confirmation = input("Are you sure you want to uninstall GPTerminal? (yes/no): ").strip().lower()
-    if confirmation == "yes":
+    if confirmation == "yes" or confirmation == "y":
         try:
             os.system("sudo rm /usr/local/bin/GPTerminal")
             print_coloured("GPTerminal has been uninstalled.", Colours.OKGREEN)
