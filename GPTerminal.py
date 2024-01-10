@@ -103,10 +103,8 @@ def update_program():
         try:
             # Reset any local changes
             subprocess.run(["git", "reset", "--hard"], check=True)
-
             # Pull the latest changes from the repository and capture output
             result = subprocess.run(["git", "pull"], check=True, stdout=subprocess.PIPE, text=True)
-
             if "Already up to date." not in result.stdout:
                 print_coloured("Script updated successfully.", Colours.OKGREEN)
             else:
