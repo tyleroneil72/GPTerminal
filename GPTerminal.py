@@ -37,7 +37,10 @@ def update_script(api_key, model):
         with open(__file__, 'w') as file:
             for line in lines:
                 if line.startswith('API_KEY ='):
-                    file.write(f'API_KEY = "{api_key}"\n')
+                    if API_KEY is None:
+                        file.write(f'API_KEY = {api_key}\n')
+                    else:
+                        file.write(f'API_KEY = "{api_key}"\n')
                 elif line.startswith('MODEL ='):
                     file.write(f'MODEL = "{model}"\n')
                 else:
