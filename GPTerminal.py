@@ -30,17 +30,17 @@ parser.add_argument('query', nargs='?', default=None, help='Query to be processe
 args = parser.parse_args()
 
 def update_script(api_key, model):
+    """ Update the script with the new API_KEY and MODEL."""
     try:
         with open(__file__, 'r') as file:
             lines = file.readlines()
 
         with open(__file__, 'w') as file:
             for line in lines:
-                if line.startswith('API_KEY ='):
-                    if API_KEY is None:
-                        file.write(f'API_KEY = {api_key}\n')
-                    else:
-                        file.write(f'API_KEY = "{api_key}"\n')
+                if line.startswith('API_KEY = None') and api_key is None:
+                    file.write(line)
+                elif line.startswith('API_KEY ='):
+                    file.write(f'API_KEY = "{api_key}"\n')
                 elif line.startswith('MODEL ='):
                     file.write(f'MODEL = "{model}"\n')
                 else:
