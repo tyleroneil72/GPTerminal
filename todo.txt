@@ -2,4 +2,6 @@
 
 - Make Update work in any directory by saving the path it is installed in a dot file
 - Make Update not delete API_KEY and MODEL by saving in a dot file
-- Add Arrow Key on GPTerminal to go through options
+- Create an Arrow Key on GPTerminal to go through options
+- Add System Prompt Ability
+- Create a src folder
