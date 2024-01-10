@@ -42,7 +42,7 @@ GPTerminal -h
 GPTerminal -setup
 # To change models
 GPTerminal -change-model
-# To use
+# To Prompt GPT
 GPTerminal "Prompt here"
 ```
 
