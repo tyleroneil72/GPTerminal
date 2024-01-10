@@ -31,7 +31,6 @@ pip3 install -r requirements.txt
 chmod +x GPTerminal.py
 # Move the script to a directory in your PATH
 sudo ln -s $(pwd)/GPTerminal.py /usr/local/bin/GPTerminal
-
 ```
 
 ## Uninstall
