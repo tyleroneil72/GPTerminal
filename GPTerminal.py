@@ -118,7 +118,7 @@ def main():
         if args.uninstall:
             uninstall_script()
         elif args.update:
-            update_script(API_KEY, MODEL)
+            update_script()
         elif args.setup:
             setup_api_key()
         elif args.change_model:
