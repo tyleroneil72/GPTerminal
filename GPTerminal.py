@@ -3,7 +3,7 @@ import openai
 import argparse
 
 # Default values for API_KEY and MODEL
-API_KEY = "your_api_key_here"
+API_KEY = None
 MODEL = "gpt-3.5-turbo"
 
 # Setup argument parser
@@ -42,10 +42,24 @@ def change_model():
     MODEL = choose_model()
     update_script(API_KEY, MODEL)
 
+# ANSI escape sequences for colours
+class Colours:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def print_coloured(message, colour):
+    print(colour + message + Colours.ENDC)
+
 def choose_model():
-    print("Available models:")
-    print("1: gpt-4")
-    print("2: gpt-3.5-turbo")
+    print_coloured("Available models:", Colours.OKBLUE)
+    print_coloured("1: gpt-4", Colours.OKGREEN)
+    print_coloured("2: gpt-3.5-turbo", Colours.OKGREEN)
     # Add more models here as needed
     choice = input("Select a model (number): ").strip()
     if choice == "1":
@@ -53,7 +67,7 @@ def choose_model():
     elif choice == "2":
         return "gpt-3.5-turbo"
     else:
-        print("Invalid choice. Defaulting to gpt-3.5-turbo.")
+        print_coloured("Invalid choice. Defaulting to gpt-3.5-turbo.", Colours.WARNING)
         return "gpt-3.5-turbo"
 
 def main():
@@ -62,17 +76,17 @@ def main():
     elif args.change_model:
         change_model()
     elif args.query:
-        if API_KEY == "your_api_key_here":
-            print("API_KEY not set. Please run 'GPTerminal -setup' first.")
+        if not API_KEY:
+            print_coloured("API_KEY not set. Please run 'GPTerminal -setup' first.", Colours.FAIL)
             return
         client = openai.OpenAI(api_key=API_KEY)
         response = client.chat.completions.create(
             model=MODEL,
             messages=[{"role": "user", "content": args.query}],
         )
-        print(response.choices[0].message.content)
+        print_coloured(response.choices[0].message.content, Colours.OKBLUE)
     else:
-        print("No input provided or invalid command. Use '-h' or '--help' for available commands.")
+        print_coloured("No input provided or invalid command. Use '-h' or '--help' for available commands.", Colours.FAIL)
 
 if __name__ == "__main__":
     main()
