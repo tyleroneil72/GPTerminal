@@ -3,6 +3,7 @@ import openai
 import argparse
 import sys
 import os
+import subprocess
 
 # Global default values
 API_KEY = None
@@ -98,14 +99,18 @@ def update_program():
     """Update the script if new code has been pushed to the repository."""
     confirmation = input("Are you sure you want to update the script and overwrite all local changes? (yes/no): ").strip().lower()
 
-    if confirmation == "yes" or confirmation == "y":
+    if confirmation in ["yes", "y"]:
         try:
             # Reset any local changes
-            os.system("git reset --hard")
-            # Pull the latest changes from the repository
-            os.system("git pull")
-        
-            print_coloured("Script updated successfully.", Colours.OKGREEN)
+            subprocess.run(["git", "reset", "--hard"], check=True)
+
+            # Pull the latest changes from the repository and capture output
+            result = subprocess.run(["git", "pull"], check=True, stdout=subprocess.PIPE, text=True)
+
+            if "Already up to date." not in result.stdout:
+                print_coloured("Script updated successfully.", Colours.OKGREEN)
+            else:
+                print_coloured("No updates were found. Your script is already up to date.", Colours.WARNING)
         except Exception as e:
             print_coloured(f"An error occurred while updating the script: {e}", Colours.FAIL)
     else:
