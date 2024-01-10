@@ -33,6 +33,19 @@ chmod +x installation.sh
 ./installation.sh
 ```
 
+## Usage
+
+```Bash
+# For a list of available commands
+GPTerminal -h
+# To set up your API Key
+GPTerminal -setup
+# To change models
+GPTerminal -change-model
+# To use
+GPTerminal "Prompt here"
+```
+
 ## Uninstallation
 
 ### Linux/Mac
