@@ -33,12 +33,14 @@ chmod +x installation.sh
 ./installation.sh
 ```
 
-## Uninstall
+## Uninstallation
 
 ### Linux/Mac
 
 ```Bash
-sudo rm /usr/local/bin/GPTerminal
+chmod +x uninstallation.sh
+# Must be in root directory
+./uninstallation.sh
 ```
 
 ## License
