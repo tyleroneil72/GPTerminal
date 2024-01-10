@@ -24,17 +24,13 @@ This project is currently under active development.
 ```Bash
 git clone https://github.com/tyleroneil72/GPTerminal.git
 cd GPTerminal
-# Install dependencies
-pip3 install -r requirements.txt
 ```
 
 ### Linux/Mac
 
 ```Bash
-# Make the script executable
-chmod +x GPTerminal.py
-# Move the script to a directory in your PATH
-sudo ln -s $(pwd)/GPTerminal.py /usr/local/bin/GPTerminal
+chmod +x installation.sh
+./installation.sh
 ```
 
 ## Uninstall
