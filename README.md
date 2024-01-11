@@ -9,11 +9,11 @@
 
 ## Description
 
-GPTerminal is a CLI application that brings the power of chat-based GPT models to your terminal. With GPTerminal, you can have interactive conversations with an AI-powered chatbot right from your command line. This program is currently Linux and Mac only.
+GPTerminal is a CLI application that brings the power of chat-based GPT models to your terminal. With GPTerminal, you can have interactive conversations with an AI-powered chatbot right from your command line.
 
 ## Note
 
-This project is currently under active development.
+This project is currently under active development. This program is currently Linux and Mac only.
 
 ## Demo
 
