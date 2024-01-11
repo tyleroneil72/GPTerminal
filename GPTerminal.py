@@ -4,15 +4,17 @@ import argparse
 import sys
 import os
 import subprocess
+import readchar
 from typing import Optional
 
 # Global default values
 API_KEY: Optional[str] = None
 MODEL: str = "gpt-3.5-turbo"
 SYSTEM_PROMPT: str = "You are GPTerminal, a version of Chat GPT that runs in the terminal."
+# These are stored in the script itself rather than a config/env file to make it easier to install/uninstall the script
 
-# ANSI escape sequences for terminal colours
 class Colours:
+    """ANSI escape sequences for terminal colours."""
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
     WARNING = '\033[93m'
@@ -75,19 +77,33 @@ def change_model() -> None:
     update_script(API_KEY, MODEL, SYSTEM_PROMPT)
 
 def choose_model() -> str:
-    """Allow the user to choose a GPT model."""
-    print_coloured("Available models:", Colours.OKBLUE)
-    print_coloured("1: gpt-4", Colours.OKGREEN)
-    print_coloured("2: gpt-3.5-turbo", Colours.OKGREEN)
-    # Add more models here as needed
-    choice = input("Select a model (number): ").strip()
-    if choice == "1":
-        return "gpt-4"
-    elif choice == "2":
-        return "gpt-3.5-turbo"
-    else:
-        print_coloured("Invalid choice. Defaulting to gpt-3.5-turbo.", Colours.WARNING)
-        return "gpt-3.5-turbo"
+    models = ["gpt-4", "gpt-3.5-turbo"]
+    selected = 0
+    print_coloured("Choose a model: (Arrow Keys)", Colours.OKGREEN)
+
+    def print_models(first_time=False) -> None:
+        if not first_time:
+            # Move the cursor up by the number of models
+            print(f"\033[{len(models)}A", end="")
+        for idx, model in enumerate(models):
+            if idx == selected:
+                print(f"{Colours.OKGREEN}>{Colours.ENDC} {model}")
+            else:
+                print(f"  {model}")
+
+    print_models(first_time=True)
+    while True:
+        key = readchar.readkey()
+        if key == readchar.key.UP and selected > 0:
+            selected -= 1
+            print_models()
+        elif key == readchar.key.DOWN and selected < len(models) - 1:
+            selected += 1
+            print_models()
+        elif key == readchar.key.ENTER:
+            break
+
+    return models[selected]
 
 def change_prompt() -> None:
     """Change the GPT system prompt."""

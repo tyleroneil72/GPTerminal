@@ -1,4 +1,3 @@
 #TODO:
 
-- Create an Arrow Key on GPTerminal to go through options
 - Create Detailed Documentation
