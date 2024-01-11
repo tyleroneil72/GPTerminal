@@ -73,12 +73,6 @@ def change_model() -> None:
     MODEL = choose_model()
     update_script(API_KEY, MODEL, SYSTEM_PROMPT)
 
-def change_prompt() -> None:
-    """Change the GPT system prompt."""
-    global SYSTEM_PROMPT
-    SYSTEM_PROMPT = input("Enter your new system prompt: ").strip()
-    update_script(API_KEY, MODEL, SYSTEM_PROMPT)
-
 def choose_model() -> str:
     """Allow the user to choose a GPT model."""
     print_coloured("Available models:", Colours.OKBLUE)
@@ -93,6 +87,12 @@ def choose_model() -> str:
     else:
         print_coloured("Invalid choice. Defaulting to gpt-3.5-turbo.", Colours.WARNING)
         return "gpt-3.5-turbo"
+
+def change_prompt() -> None:
+    """Change the GPT system prompt."""
+    global SYSTEM_PROMPT
+    SYSTEM_PROMPT = input("Enter your new system prompt: ").strip()
+    update_script(API_KEY, MODEL, SYSTEM_PROMPT)
 
 def uninstall_script() -> None:
     """Uninstall the script by removing it from /usr/local/bin."""
