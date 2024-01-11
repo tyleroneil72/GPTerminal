@@ -23,4 +23,5 @@ if [ "$(tput cols)" -gt 55 ]; then
 fi
 
 # Print the installation message
-echo -e "\033[32mGPTerminal has been installed.\033[0m"
+echo -e "\033[32mGPTerminal has been installed. Run \033[34m'GPTerminal -h'\033[32m or \033[34m'GPTerminal --help'\033[32m for available commands.\033[0m"
+
