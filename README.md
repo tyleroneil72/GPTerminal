@@ -22,14 +22,13 @@ This project is currently under active development.
 ## Installation
 
 ```Bash
+# Clone the repo
 git clone https://github.com/tyleroneil72/GPTerminal.git
+# Change into the GPTerminal directory
 cd GPTerminal
-```
-
-### Linux/Mac
-
-```Bash
+# Make the installation script executable
 chmod +x installation.sh
+# Run installation script
 ./installation.sh
 ```
 
@@ -51,8 +50,6 @@ GPTerminal "Prompt here"
 ```
 
 ## Uninstallation
-
-### Linux/Mac
 
 ```Bash
 GPTerminal -uninstall
