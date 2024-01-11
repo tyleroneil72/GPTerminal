@@ -24,11 +24,12 @@ def print_coloured(message: str, colour: str) -> None:
     print(colour + message + Colours.ENDC)
 
 # Setup argument parser for command line interface
-description = """
-GPTerminal - A CLI tool for interacting with OpenAI's GPT models.
-Created by Tyler O'Neil. Check out my website -> https://tyleroneil.dev
-"""
-epilog = "For more detailed instructions, visit https://github.com/tyleroneil72/GPTerminal"
+description = f"""
+    GPTerminal - A CLI tool for interacting with OpenAI's GPT models.
+    For more detailed instructions, visit {Colours.OKBLUE}https://github.com/tyleroneil72/GPTerminal{Colours.ENDC}
+    """
+epilog = f"Created by Tyler O'Neil. Check out my website -> {Colours.OKBLUE}https://tyleroneil.dev{Colours.ENDC}"
+
 parser = argparse.ArgumentParser(description=description, epilog=epilog)
 parser.add_argument('-setup', action='store_true', help='Setup or change the API_KEY for GPTerminal.')
 parser.add_argument('-change-model', action='store_true', help='Change the GPT model.')
