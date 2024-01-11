@@ -134,6 +134,7 @@ def update_program() -> None:
             # Pull the latest changes from the repository and capture output
             result = subprocess.run(["git", "pull"], check=True, stdout=subprocess.PIPE, text=True)
             if "Already up to date." not in result.stdout:
+                subprocess.run(["pip3", "install", "-r", "requirements.txt"], check=True)
                 print_coloured("Script updated successfully.", Colours.OKGREEN)
             else:
                 print_coloured("No updates were found. Your script is already up to date.", Colours.WARNING)
