@@ -19,6 +19,10 @@ class Colours:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
+def print_coloured(message: str, colour: str) -> None:
+    """Print a message in the terminal with the specified colour."""
+    print(colour + message + Colours.ENDC)
+
 # Setup argument parser for command line interface
 description = """
 GPTerminal - A CLI tool for interacting with OpenAI's GPT models.
@@ -28,12 +32,13 @@ epilog = "For more detailed instructions, visit https://github.com/tyleroneil72/
 parser = argparse.ArgumentParser(description=description, epilog=epilog)
 parser.add_argument('-setup', action='store_true', help='Setup or change the API_KEY for GPTerminal.')
 parser.add_argument('-change-model', action='store_true', help='Change the GPT model.')
+parser.add_argument('-change-prompt', action='store_true', help='Change the GPT system prompt.')
 parser.add_argument('-update', action='store_true', help='Update the program. Must be ran in the same directory as the repository.')
 parser.add_argument('-uninstall', action='store_true', help='Uninstall GPTerminal from the system.')
 parser.add_argument('query', nargs='?', default=None, help='Query to be processed by the GPT model.')
 args = parser.parse_args()
 
-def update_script(api_key: str, model: str) -> None:
+def update_script(api_key: str, model: str, system_prompt: str) -> None:
     """ Update the script with the new API_KEY and MODEL."""
     try:
         with open(__file__, 'r') as file:
@@ -47,6 +52,8 @@ def update_script(api_key: str, model: str) -> None:
                     file.write(f'API_KEY: Optional[str] = "{api_key}"\n')
                 elif line.startswith('MODEL: str ='):
                     file.write(f'MODEL: str = "{model}"\n')
+                elif line.startswith('SYSTEM_PROMPT: str ='):
+                    file.write(f'SYSTEM_PROMPT: str = "{system_prompt}"\n')
                 else:
                     file.write(line)
     except IOError as e:
@@ -57,18 +64,20 @@ def setup_api_key() -> None:
     """Prompt user to enter a new API key and update the script."""
     global API_KEY
     api_key = input("Enter your new API_KEY: ").strip()
-    update_script(api_key, MODEL)
+    update_script(api_key, MODEL, SYSTEM_PROMPT)
     API_KEY = api_key
 
 def change_model() -> None:
     """Change the GPT model being used."""
     global MODEL
     MODEL = choose_model()
-    update_script(API_KEY, MODEL)
+    update_script(API_KEY, MODEL, SYSTEM_PROMPT)
 
-def print_coloured(message: str, colour: str) -> None:
-    """Print a message in the terminal with the specified colour."""
-    print(colour + message + Colours.ENDC)
+def change_prompt() -> None:
+    """Change the GPT system prompt."""
+    global SYSTEM_PROMPT
+    SYSTEM_PROMPT = input("Enter your new system prompt: ").strip()
+    update_script(API_KEY, MODEL, SYSTEM_PROMPT)
 
 def choose_model() -> str:
     """Allow the user to choose a GPT model."""
@@ -128,6 +137,8 @@ def main() -> None:
             setup_api_key()
         elif args.change_model:
             change_model()
+        elif args.change_prompt:
+            change_prompt()
         elif args.query:
             if not API_KEY:
                 print_coloured("API_KEY not set. Please run 'GPTerminal -setup' first.", Colours.FAIL)
