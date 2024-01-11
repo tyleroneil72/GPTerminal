@@ -27,7 +27,7 @@ epilog = "For more detailed instructions, visit https://github.com/tyleroneil72/
 parser = argparse.ArgumentParser(description=description, epilog=epilog)
 parser.add_argument('-setup', action='store_true', help='Setup or change the API_KEY for GPTerminal.')
 parser.add_argument('-change-model', action='store_true', help='Change the GPT model.')
-parser.add_argument('-update', action='store_true', help='Update the program.')
+parser.add_argument('-update', action='store_true', help='Update the program. Must be ran in the same directory as the repository.')
 parser.add_argument('-uninstall', action='store_true', help='Uninstall GPTerminal from the system.')
 parser.add_argument('query', nargs='?', default=None, help='Query to be processed by the GPT model.')
 args = parser.parse_args()
