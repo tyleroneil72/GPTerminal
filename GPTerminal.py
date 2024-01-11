@@ -9,6 +9,7 @@ from typing import Optional
 # Global default values
 API_KEY: Optional[str] = None
 MODEL: str = "gpt-3.5-turbo"
+SYSTEM_PROMPT: str = "You are GPTerminal, a version of Chat GPT that runs in the terminal."
 
 # ANSI escape sequences for terminal colours
 class Colours:
@@ -134,7 +135,7 @@ def main() -> None:
             client = openai.OpenAI(api_key=API_KEY)
             response = client.chat.completions.create(
                 model=MODEL,
-                messages=[{"role": "user", "content": args.query}],
+                messages=[{"role": "user", "content": args.query}, {"role": "system", "content": SYSTEM_PROMPT}],
             )
             print_coloured(response.choices[0].message.content, Colours.OKBLUE)
         else:
