@@ -111,7 +111,7 @@ def update_program() -> None:
             else:
                 print_coloured("No updates were found. Your script is already up to date.", Colours.WARNING)
         except Exception as e:
-            print_coloured(f"An error occurred while updating the script: {e}", Colours.FAIL)
+            print_coloured(f"An error occurred while updating the script. Please make sure you are running this command in the repository directory: {e}", Colours.FAIL)
     else:
         print_coloured("Update cancelled.", Colours.WARNING)
 
