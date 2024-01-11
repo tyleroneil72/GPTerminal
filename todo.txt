@@ -1,5 +1,4 @@
 #TODO:
 
 - Create an Arrow Key on GPTerminal to go through options
-- Create a src folder
 - Create Detailed Documentation
