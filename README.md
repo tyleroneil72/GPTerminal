@@ -13,7 +13,7 @@ GPTerminal is a CLI application that brings the power of chat-based GPT models t
 
 ## Note
 
-This project is currently under active development. This program is currently Linux and Mac only.
+This program is currently Linux and Mac only.
 
 ## Demo
 ![GPTerminal_GIF](https://github.com/tyleroneil72/GPTerminal/assets/43754564/bebcff73-cdae-4fae-9b13-2dc39725766a)
