@@ -46,7 +46,7 @@ GPTerminal -change-prompt
 # To Update Program
 GPTerminal -update
 # To Prompt GPT
-GPTerminal "Prompt here"
+GPTerminal "Your Prompt Here"
 ```
 
 ## Uninstallation
