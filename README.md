@@ -55,6 +55,10 @@ GPTerminal "Your Prompt Here"
 GPTerminal -uninstall
 ```
 
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
